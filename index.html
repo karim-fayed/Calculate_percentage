@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>حساب النسبة المئوية</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <!-- HTML content -->
     <div class="container">
         <h2>حساب النسبة المئوية</h2>
         <form id="percentageForm">
@@ -16,7 +15,7 @@
             <input type="text" id="amount" name="amount" required>
             
             <label for="percentage">أدخل النسبة المئوية</label>
-            <input type="text" id="percentage" name="percentage" required placeholder="%" step="any">
+            <input type="text" id="percentage" name="percentage" required placeholder="%">
 
             <label for="operation">اختر العملية</label>
             <select id="operation" name="operation">
@@ -26,11 +25,16 @@
             </select>
             <button type="submit">احسب</button>
         </form>
-            <div id="result"></div>
-            <!-- إضافة النص المتحرك -->
+
+        <label for="numberInput">أدخل الرقم للتفقيط</label>
+        <input type="text" id="numberInput" name="numberInput">
+        <button id="convertButton">تفقيط الرقم</button>
+        <div id="convertedResult"></div>
+
+        <div id="result"></div>
         <div class="moving-text">*𝓚𝓐𝓡𝓘𝓜𝓐𝓗𝓜𝓔𝓓*</div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="scripts.js"></script>
 </body>
 </html>
