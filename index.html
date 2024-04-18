@@ -1,40 +1,0 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حساب النسبة المئوية</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-
-    <div class="container">
-        <h2>حساب النسبة المئوية</h2>
-        <form id="percentageForm">
-            <label class="large-text" for="amount">أدخل المبلغ</label>
-            <input type="text" id="amount" name="amount" required>
-            
-            <label class="large-text" for="percentage">أدخل النسبة المئوية</label>
-            <input type="text" id="percentage" name="percentage" required placeholder="%">
-
-            <label class="large-text" for="operation">اختر العملية</label>
-            <select id="operation" name="operation">
-                <option value="extract">استخراج النسبة من المبلغ فقط</option>
-                <option value="subtract">استخراج النسبة وطرحها من المبلغ</option>
-                <option value="add">استخراج النسبة واضافتها إلى المبلغ</option>
-            </select>
-            <button type="submit">احسب</button>
-        </form>
-
-        <label class="large-text" for="numberInput">أدخل الرقم للتفقيط</label>
-        <input type="text" id="numberInput" name="numberInput">
-        <button id="convertButton">تفقيط الرقم</button>
-        <div id="convertedResult"></div>
-
-        <div id="result"></div>
-        <div class="moving-text">*𝓚𝓐𝓡𝓘𝓜𝓐𝓗𝓜𝓔𝓓*</div>
-    </div>
-
-    <script src="scripts.js"></script>
-</body>
-</html>
