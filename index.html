@@ -11,13 +11,13 @@
     <div class="container">
         <h2>حساب النسبة المئوية</h2>
         <form id="percentageForm">
-            <label for="amount">أدخل المبلغ</label>
+            <label class="large-text" for="amount">أدخل المبلغ</label>
             <input type="text" id="amount" name="amount" required>
             
-            <label for="percentage">أدخل النسبة المئوية</label>
+            <label class="large-text" for="percentage">أدخل النسبة المئوية</label>
             <input type="text" id="percentage" name="percentage" required placeholder="%">
 
-            <label for="operation">اختر العملية</label>
+            <label class="large-text" for="operation">اختر العملية</label>
             <select id="operation" name="operation">
                 <option value="extract">استخراج النسبة من المبلغ فقط</option>
                 <option value="subtract">استخراج النسبة وطرحها من المبلغ</option>
@@ -26,7 +26,7 @@
             <button type="submit">احسب</button>
         </form>
 
-        <label for="numberInput">أدخل الرقم للتفقيط</label>
+        <label class="large-text" for="numberInput">أدخل الرقم للتفقيط</label>
         <input type="text" id="numberInput" name="numberInput">
         <button id="convertButton">تفقيط الرقم</button>
         <div id="convertedResult"></div>
