@@ -18,7 +18,7 @@ body {
     width: 400px;
     position: relative;
     text-align: center; /* لتوسيط المحتوى */
-    margin-bottom: 250px; /* رفع الكونتينر بمقدار 20 نقطة */
+    margin-bottom: 20px; /* تخفيض الكونتينر بمقدار 20 نقطة */
 }
 
 h2 {
@@ -79,17 +79,19 @@ button:hover {
     font-size: 24px;
     font-weight: bold;
 }
+
 /* إضافة نص متحرك */
 @keyframes moveText {
     0% {
         transform: translateX(100%);
-            text-shadow:  #FC0 1px 0 10px; /* إزالة الظل عند بداية الحركة */
+        text-shadow: #FC0 1px 0 10px; /* إزالة الظل عند بداية الحركة */
     }
     100% {
         transform: translateX(-100%);
-            text-shadow: #FC0 1px 0 10px; /* إزالة الظل عند بداية الحركة */
+        text-shadow: #FC0 1px 0 10px; /* إزالة الظل عند بداية الحركة */
     }
 }
+
 /* إضافة نص متحرك */
 .moving-text {
     position: absolute;
@@ -107,17 +109,19 @@ button:hover {
 }
 
 .video-container {
-  width: 100%;
-  text-align: center;
-  margin-top: -200px; /* تحديد التباعد بين الكونتينر والفيديو */
-  position: absolute;
-  #bottom: -70px; /* النزول إلى الأسفل بمقدار 80 نقطة */
-  left: -570px;
+    width: 100%;
+    text-align: center;
+    margin-top: 80px; /* تحديد التباعد بين الكونتينر والفيديو */
+    position: absolute;
+    bottom: -70px; /* النزول إلى الأسفل بمقدار 80 نقطة */
+    left: -570px;
 }
+
 .video-container iframe {
-  max-width: 100%;
-  max-height: 400px;
+    max-width: 100%;
+    max-height: 400px;
 }
+
 #numberInput {
     margin-top: 3px; /* تحريك النص إلى الأسفل */
 }
