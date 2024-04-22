@@ -113,7 +113,7 @@ button:hover {
     text-align: center;
     margin-top: 20px; /* تحديد التباعد بين الكونتينر والفيديو */
     position: absolute;
-    bottom: 200px; /* النزول إلى الأسفل بمقدار 80 نقطة */
+    bottom: 350px; /* النزول إلى الأسفل بمقدار 80 نقطة */
     left: -570px;
 }
 
