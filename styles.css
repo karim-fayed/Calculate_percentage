@@ -105,6 +105,14 @@ button:hover {
     font-weight: bold; /* توسيع الخط */
 }
 
+.video-container {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px; /* تحديد التباعد بين الكونتينر والفيديو */
+  position: absolute;
+  bottom: -150px; /* النزول إلى الأسفل بمقدار 80 نقطة */
+  left: 0;
+}
 #numberInput {
     margin-top: 3px; /* تحريك النص إلى الأسفل */
 }
