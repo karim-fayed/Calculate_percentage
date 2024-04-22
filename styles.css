@@ -112,7 +112,7 @@ button:hover {
   margin-top: -200px; /* تحديد التباعد بين الكونتينر والفيديو */
   position: absolute;
   #bottom: -70px; /* النزول إلى الأسفل بمقدار 80 نقطة */
-  left: -270px;
+  left: -570px;
 }
 .video-container iframe {
   max-width: 100%;
