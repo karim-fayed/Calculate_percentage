@@ -18,6 +18,7 @@ body {
     width: 400px;
     position: relative;
     text-align: center; /* لتوسيط المحتوى */
+    margin-bottom: 250px; /* رفع الكونتينر بمقدار 20 نقطة */
 }
 
 h2 {
@@ -110,7 +111,7 @@ button:hover {
   text-align: center;
   margin-top: 20px; /* تحديد التباعد بين الكونتينر والفيديو */
   position: absolute;
-  bottom: -150px; /* النزول إلى الأسفل بمقدار 80 نقطة */
+  bottom: -50px; /* النزول إلى الأسفل بمقدار 80 نقطة */
   left: 0;
 }
 #numberInput {
