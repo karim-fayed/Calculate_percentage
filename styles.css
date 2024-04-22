@@ -94,10 +94,10 @@ button:hover {
 .moving-text {
     position: absolute;
     bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: moveText 10s linear infinite;
-    width: 155px;
+    left: 30%;
+    transform: translateX(-80%);
+    animation: moveText 12s linear infinite;
+    width: 150px;
     color: blue;
 }
 
