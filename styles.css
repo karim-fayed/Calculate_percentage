@@ -18,7 +18,7 @@ body {
     width: 400px;
     position: relative;
     text-align: center; /* لتوسيط المحتوى */
-    margin-bottom: 20px; /* تخفيض الكونتينر بمقدار 20 نقطة */
+    margin-bottom: 250px; /* تخفيض الكونتينر بمقدار 20 نقطة */
 }
 
 h2 {
