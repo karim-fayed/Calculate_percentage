@@ -111,7 +111,7 @@ button:hover {
 .video-container {
     width: 100%;
     text-align: center;
-    margin-top: 80px; /* تحديد التباعد بين الكونتينر والفيديو */
+    margin-top: -200px; /* تحديد التباعد بين الكونتينر والفيديو */
     position: absolute;
     bottom: -70px; /* النزول إلى الأسفل بمقدار 80 نقطة */
     left: -570px;
