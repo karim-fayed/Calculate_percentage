@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "number-to-arabic-words": "^1.5.3"
+  },
+  "name": "calculator",
+  "version": "0.1.0",
+  "main": "scripts.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karim-fayed/Calculate_percentage.git"
+  },
+  "keywords": [
+    "Calculate"
+  ],
+  "author": "karim-fayed",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/karim-fayed/Calculate_percentage/issues"
+  },
+  "homepage": "https://github.com/karim-fayed/Calculate_percentage#readme",
+  "description": ""
+}
