@@ -1,0 +1,5 @@
+/*!
+ * NumberToArabicWords (https://mahmoudshahin1111.github.io/numbers-to-arabic-words/)
+ * Copyright 2023 The NumberToArabicWords Authors (https://github.com/mahmoudshahin1111/numbers-to-arabic-words/contributors)
+ * Licensed under MIT (https://github.com/mahmoudshahin1111/numbers-to-arabic-words/blob/master/LICENSE)
+ */
