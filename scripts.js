@@ -3,9 +3,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const percentageInput = document.getElementById("percentage");
     const numberInput = document.getElementById("numberInput");
 
-    // Import the required function from the number-to-arabic-words package
-    const { toArabicWord } = require('number-to-arabic-words');
-
     document.getElementById("percentageForm").addEventListener("submit", function(event) {
         event.preventDefault();
         let amount = parseFloat(amountInput.value);
@@ -35,8 +32,8 @@ document.addEventListener("DOMContentLoaded", function() {
     function convertToArabic() {
         let numberValue = numberInput.value.trim();
         if (numberValue !== '') {
-            // Use the imported function to convert numbers to Arabic words
-            let convertedNumber = toArabicWord(numberValue);
+            // Use the global variable numberToArabic provided by the imported script
+            let convertedNumber = numberToArabic(numberValue);
             document.getElementById("convertedResult").innerHTML = "<h3>نتيجة التفقيط:</h3><p>" + convertedNumber + "</p>";
         } else {
             alert("الرجاء إدخال الرقم للتفقيط.");

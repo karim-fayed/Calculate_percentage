@@ -26,15 +26,20 @@
             <button type="submit">احسب</button>
         </form>
 
-        <label class="large-text" for="numberInput">أدخل الرقم للتفقيط</label>
+       <!-- <label class="large-text" for="numberInput">أدخل الرقم للتفقيط</label>
         <input type="text" id="numberInput" name="numberInput">
         <button id="convertButton">تفقيط الرقم</button>
         <div id="convertedResult"></div>
-
+             -->
         <div id="result"></div>
         <div class="moving-text">*𝓚𝓐𝓡𝓘𝓜𝓐𝓗𝓜𝓔𝓓*</div>
-    </div>
+        <!-- <div class="container"> -->
+        <!-- Form and other elements -->
 
-    <script src="scripts.js"></script>
+   </div>
+    <!-- Load the number-to-arabic-words script -->
+    <script src="node_modules/number-to-arabic-words/dist/index.js"></script>
+    <!-- Load your bundled script -->
+   <script src="dist/bundle.js"></script>
 </body>
 </html>
