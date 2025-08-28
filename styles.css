@@ -1,6 +1,6 @@
-/* CSS styles */
+/* CSS */
 body {
-    font-family: 'Tajawal', Arial, sans-serif; /* استخدام خط مخصص */
+    font-family: 'Tajawal', Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
@@ -13,16 +13,16 @@ body {
 .container {
     background-color: #fff;
     padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     width: 400px;
+    text-align: center;
     position: relative;
-    text-align: center; /* لتوسيط المحتوى */
-    overflow: hidden; /* التأكد من أن النص لا يخرج من الحاوية */
 }
 
 h2 {
     color: #333;
+    margin-bottom: 20px;
 }
 
 form {
@@ -34,13 +34,12 @@ form {
 label {
     margin-bottom: 10px;
     color: #555;
-    font-size: 18px; /* حجم الخط */
-    font-weight: bold; /* توسيع الخط */
+    font-size: 18px;
+    font-weight: bold;
 }
 
-input[type="text"],
-select {
-    width: calc(100% - 20px); /* يوفر نفس المساحة لكافة حقول الإدخال */
+input[type="number"], select {
+    width: calc(100% - 20px);
     padding: 12px;
     margin-bottom: 15px;
     border-radius: 8px;
@@ -49,19 +48,18 @@ select {
     transition: border-color 0.3s;
 }
 
-input[type="text"]:focus,
-select:focus {
+input[type="number"]:focus, select:focus {
     border-color: #007bff;
     outline: none;
 }
 
 button {
-    width: calc(100% - 20px); /* يوفر نفس المساحة لكافة الأزرار */
+    width: calc(100% - 20px);
     padding: 12px;
     border: none;
     border-radius: 8px;
     background-color: #28a745;
-    color: #fff;
+    color: white;
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-weight: bold;
@@ -73,49 +71,30 @@ button:hover {
     background-color: #20cf1a;
 }
 
-button:active {
-    background-color: #18b816; /* لون أكثر إشراقًا عند النقر */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-#result,
-#convertedResult {
+#result {
     margin-top: 20px;
-    color: green;
-    font-size: 24px;
+    color: #333;
+    font-size: 20px;
     font-weight: bold;
 }
 
-/* إضافة نص متحرك */
-@keyframes moveText {
-    0% {
-        transform: translateX(100%); /* يبدأ النص من اليمين */
-    }
-    100% {
-        transform: translateX(-100%); /* ينتهي النص في اليسار */
-    }
-}
-
-/* إضافة نص متحرك */
 .moving-text {
     position: absolute;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    animation: moveText 15s linear infinite; /* زيادة المدة لجعل الحركة أبطأ */
+    animation: moveText 15s linear infinite;
     font-size: 24px;
-    width: 100%;
-    text-align: center;
-    color: blue; /* لون الخط الأزرق */
+    color: blue;
     font-weight: bold;
-    text-shadow: 0 0 10px rgba(0, 0, 255, 0.5); /* تأثير الظل الأزرق */
+    text-shadow: 0 0 10px rgba(0, 0, 255, 0.5);
 }
 
-.large-text {
-    font-size: 20px; /* حجم الخط الأكبر */
-    font-weight: bold; /* توسيع الخط */
-}
-
-#numberInput {
-    margin-top: 3px; /* تحريك النص إلى الأسفل */
+@keyframes moveText {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
 }
