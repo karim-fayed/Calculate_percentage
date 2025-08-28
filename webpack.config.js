@@ -5,5 +5,7 @@ module.exports = {
   output: {
     filename: 'bundle.js', // اسم ملف الإخراج الذي سيتم إنشاؤه
     path: path.resolve(__dirname, 'dist') // المجلد الذي سيتم حفظ ملف الإخراج فيه
-  }
+  },
+  mode: 'development', // أو 'production' حسب البيئة
+  devtool: 'source-map', // يمكنك استخدام هذا لإيقاف `eval` (في الإنتاج)
 };
