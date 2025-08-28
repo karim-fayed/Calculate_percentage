@@ -47,26 +47,26 @@ document.addEventListener("DOMContentLoaded", function() {
         switch (operation) {
             case "calculateTax":
                 result = preciseMul(amount, percentage) / 100;
-                resultDiv.innerHTML = `<h3>الضريبة:</h3><p>${result.toFixed(2)}</p>`;
+                resultDiv.innerHTML = `<h3>الضريبة:</h3><p>${result.toFixed(4)}</p>`;
                 tafqitText = tafqit(result);
                 break;
             case "calculateTotalIncludingTax":
                 result = preciseMul(amount, (1 + percentage / 100));
-                resultDiv.innerHTML = `<h3>المبلغ الإجمالي مع الضريبة:</h3><p>${result.toFixed(2)}</p>`;
+                resultDiv.innerHTML = `<h3>المبلغ الإجمالي مع الضريبة:</h3><p>${result.toFixed(4)}</p>`;
                 tafqitText = tafqit(result);
                 break;
             case "calculateAmountBeforeTax":
                 const amountBeforeTax = amount / (1 + percentage / 100);
                 const taxAmount = amount - amountBeforeTax;
-                resultDiv.innerHTML = `<h3>المبلغ قبل الضريبة:</h3><p>${amountBeforeTax.toFixed(2)}</p>
-                                       <h3>مقدار الضريبة:</h3><p>${taxAmount.toFixed(2)}</p>`;
+                resultDiv.innerHTML = `<h3>المبلغ قبل الضريبة:</h3><p>${amountBeforeTax.toFixed(4)}</p>
+                                       <h3>مقدار الضريبة:</h3><p>${taxAmount.toFixed(4)}</p>`;
                 tafqitText = tafqit(amountBeforeTax) + "<br>" + tafqit(taxAmount);
                 break;
             case "extractAndSubtractTax":
                 const amountBeforeTaxExtract = amount / (1 + percentage / 100);
                 const taxExtractAmount = amount - amountBeforeTaxExtract;
-                resultDiv.innerHTML = `<h3>المبلغ قبل الضريبة:</h3><p>${amountBeforeTaxExtract.toFixed(2)}</p>
-                                       <h3>مقدار الضريبة:</h3><p>${taxExtractAmount.toFixed(2)}</p>`;
+                resultDiv.innerHTML = `<h3>المبلغ قبل الضريبة:</h3><p>${amountBeforeTaxExtract.toFixed(4)}</p>
+                                       <h3>مقدار الضريبة:</h3><p>${taxExtractAmount.toFixed(4)}</p>`;
                 tafqitText = tafqit(amountBeforeTaxExtract) + "<br>" + tafqit(taxExtractAmount);
                 break;
             default:
