@@ -18,6 +18,7 @@ body {
     width: 400px;
     position: relative;
     text-align: center; /* لتوسيط المحتوى */
+    overflow: hidden; /* التأكد من أن النص لا يخرج من الحاوية */
 }
 
 h2 {
@@ -88,12 +89,10 @@ button:active {
 /* إضافة نص متحرك */
 @keyframes moveText {
     0% {
-        transform: translateX(100%);
-        text-shadow: 1px 1px 5px rgba(255, 215, 0, 1);
+        transform: translateX(100%); /* يبدأ النص من اليمين */
     }
     100% {
-        transform: translateX(-100%);
-        text-shadow: 1px 1px 5px rgba(255, 215, 0, 1);
+        transform: translateX(-100%); /* ينتهي النص في اليسار */
     }
 }
 
@@ -107,9 +106,9 @@ button:active {
     font-size: 24px;
     width: 100%;
     text-align: center;
-    color: #fc0; /* لون متناسق مع الظلال */
+    color: blue; /* لون الخط الأزرق */
     font-weight: bold;
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* تأثير الظل */
+    text-shadow: 0 0 10px rgba(0, 0, 255, 0.5); /* تأثير الظل الأزرق */
 }
 
 .large-text {
