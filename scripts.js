@@ -61,6 +61,14 @@ document.addEventListener("DOMContentLoaded", function() {
                                        <h3>مقدار الضريبة:</h3><p>${taxAmount.toFixed(2)}</p>`;
                 break;
 
+            case "extractAndSubtractTax":
+                // إذا كان المبلغ الإجمالي شامل الضريبة ويريد المستخدم معرفة المبلغ الأساسي والضريبة
+                const amountBeforeTaxExtractAndSubtract = amount / (1 + percentage / 100);
+                const taxExtractAndSubtractAmount = amount - amountBeforeTaxExtractAndSubtract;
+                resultDiv.innerHTML = `<h3>المبلغ قبل الضريبة:</h3><p>${amountBeforeTaxExtractAndSubtract.toFixed(2)}</p>
+                                       <h3>مقدار الضريبة:</h3><p>${taxExtractAndSubtractAmount.toFixed(2)}</p>`;
+                break;
+
             default:
                 result = 0;
                 break;
