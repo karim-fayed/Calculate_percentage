@@ -4,99 +4,176 @@ var __webpack_exports__ = {};
   !*** ./scripts.js ***!
   \********************/
 document.addEventListener("DOMContentLoaded", function() {
+    // عناصر النموذج
     const amountInput = document.getElementById("amount");
     const percentageInput = document.getElementById("percentage");
     const resultDiv = document.getElementById("result");
-    const errorDiv = document.getElementById("error");
+    const tafqitDiv = document.getElementById("convertedResult");
+    const form = document.getElementById("percentageForm");
+    const operationSelect = document.getElementById("operation");
 
-    // التحقق من صحة المدخلات عند التغيير
+    // التحقق من صحة المدخلات
     function validateInputs() {
         const amount = parseFloat(amountInput.value);
         const percentage = parseFloat(percentageInput.value);
         const isAmountValid = !isNaN(amount) && amount > 0;
         const isPercentageValid = !isNaN(percentage) && percentage > 0 && percentage <= 100;
-
-        document.getElementById("percentageForm").querySelector("button").disabled = !(isAmountValid && isPercentageValid);
+        form.querySelector("button[type='submit']").disabled = !(isAmountValid && isPercentageValid);
     }
 
     amountInput.addEventListener("input", validateInputs);
     percentageInput.addEventListener("input", validateInputs);
 
-    document.getElementById("percentageForm").addEventListener("submit", function(event) {
+    form.addEventListener("submit", function(event) {
         event.preventDefault();
-
         const amount = parseFloat(amountInput.value);
         const percentage = parseFloat(percentageInput.value);
-        const operation = document.getElementById("operation").value;
+        const operation = operationSelect.value;
         let result = 0;
+        let tafqitText = "";
 
+        // تحقق صارم
         if (isNaN(amount) || amount <= 0) {
-            errorDiv.innerHTML = "الرجاء إدخال مبلغ صحيح.";
+            resultDiv.innerHTML = "<span style='color:red'>الرجاء إدخال مبلغ صحيح.</span>";
+            tafqitDiv.innerHTML = "";
             return;
         }
         if (isNaN(percentage) || percentage <= 0 || percentage > 100) {
-            errorDiv.innerHTML = "الرجاء إدخال نسبة مئوية صحيحة بين 1 و 100.";
+            resultDiv.innerHTML = "<span style='color:red'>الرجاء إدخال نسبة مئوية صحيحة بين 1 و 100.</span>";
+            tafqitDiv.innerHTML = "";
             return;
         }
 
-        errorDiv.innerHTML = ''; // إزالة الرسائل الخطأ السابقة
-
         switch (operation) {
             case "calculateTax":
-                result = (amount * percentage) / 100;
+                result = preciseMul(amount, percentage) / 100;
                 resultDiv.innerHTML = `<h3>الضريبة:</h3><p>${result.toFixed(2)}</p>`;
+                tafqitText = tafqit(result);
                 break;
-
             case "calculateTotalIncludingTax":
-                result = amount * (1 + percentage / 100);
+                result = preciseMul(amount, (1 + percentage / 100));
                 resultDiv.innerHTML = `<h3>المبلغ الإجمالي مع الضريبة:</h3><p>${result.toFixed(2)}</p>`;
+                tafqitText = tafqit(result);
                 break;
-
             case "calculateAmountBeforeTax":
                 const amountBeforeTax = amount / (1 + percentage / 100);
                 const taxAmount = amount - amountBeforeTax;
                 resultDiv.innerHTML = `<h3>المبلغ قبل الضريبة:</h3><p>${amountBeforeTax.toFixed(2)}</p>
                                        <h3>مقدار الضريبة:</h3><p>${taxAmount.toFixed(2)}</p>`;
+                tafqitText = tafqit(amountBeforeTax) + "<br>" + tafqit(taxAmount);
                 break;
-
             case "extractAndSubtractTax":
-                const amountBeforeTaxExtractAndSubtract = amount / (1 + percentage / 100);
-                const taxExtractAndSubtractAmount = amount - amountBeforeTaxExtractAndSubtract;
-                resultDiv.innerHTML = `<h3>المبلغ قبل الضريبة:</h3><p>${amountBeforeTaxExtractAndSubtract.toFixed(2)}</p>
-                                       <h3>مقدار الضريبة:</h3><p>${taxExtractAndSubtractAmount.toFixed(2)}</p>`;
+                const amountBeforeTaxExtract = amount / (1 + percentage / 100);
+                const taxExtractAmount = amount - amountBeforeTaxExtract;
+                resultDiv.innerHTML = `<h3>المبلغ قبل الضريبة:</h3><p>${amountBeforeTaxExtract.toFixed(2)}</p>
+                                       <h3>مقدار الضريبة:</h3><p>${taxExtractAmount.toFixed(2)}</p>`;
+                tafqitText = tafqit(amountBeforeTaxExtract) + "<br>" + tafqit(taxExtractAmount);
                 break;
-
             default:
-                result = 0;
-                break;
+                resultDiv.innerHTML = "<span style='color:red'>عملية غير معروفة.</span>";
+                tafqitText = "";
         }
+        tafqitDiv.innerHTML = `<h3>نتيجة التفقيط:</h3><p>${tafqitText}</p>`;
     });
 
-    document.getElementById("convertButton").addEventListener("click", function() {
-        convertToArabic();
-    });
+    // دوال رياضية دقيقة
+    function preciseMul(a, b) {
+        // ضرب بدقة عالية للأرقام العشرية
+        const aStr = a.toString(), bStr = b.toString();
+        const aDec = (aStr.split('.')[1] || '').length;
+        const bDec = (bStr.split('.')[1] || '').length;
+        return Number((a * b).toFixed(aDec + bDec));
+    }
 
-    function convertToArabic() {
-        let numberValue = numberInput.value.trim();
+    // دالة تفقيط احترافية للريال والهللة
+    function tafqit(num) {
+        if (isNaN(num)) return "";
+        num = Number(num).toFixed(2);
+        let [intPart, decPart] = num.split('.');
+        intPart = parseInt(intPart);
+        decPart = parseInt(decPart);
+        // دوال الأرقام
+        const units = ["", "واحد", "اثنان", "ثلاثة", "أربعة", "خمسة", "ستة", "سبعة", "ثمانية", "تسعة"];
+        const teens = ["عشرة", "أحد عشر", "اثنا عشر", "ثلاثة عشر", "أربعة عشر", "خمسة عشر", "ستة عشر", "سبعة عشر", "ثمانية عشر", "تسعة عشر"];
+        const tens = ["", "عشرة", "عشرون", "ثلاثون", "أربعون", "خمسون", "ستون", "سبعون", "ثمانون", "تسعون"];
+        const hundreds = ["", "مائة", "مائتان", "ثلاثمائة", "أربعمائة", "خمسمائة", "ستمائة", "سبعمائة", "ثمانمائة", "تسعمائة"];
+        const scales = ["", "ألف", "مليون", "مليار"];
 
-        if (numberValue === '') {
-            errorDiv.innerHTML = "الرجاء إدخال الرقم للتفقيط.";
-            return;
+        function chunkToWords(chunk) {
+            let words = [];
+            let h = Math.floor(chunk / 100);
+            let t = chunk % 100;
+            if (h > 0) words.push(hundreds[h]);
+            if (t > 0) {
+                if (t < 10) words.push(units[t]);
+                else if (t < 20) words.push(teens[t - 10]);
+                else {
+                    let u = t % 10;
+                    let d = Math.floor(t / 10);
+                    if (u > 0) words.push(units[u]);
+                    words.push(tens[d]);
+                }
+            }
+            return words.join(" و ");
         }
 
-        if (!/^\d+(\.\d+)?$/.test(numberValue)) {
-            errorDiv.innerHTML = "الرجاء إدخال رقم صالح.";
-            return;
+        function getScaleWord(chunk, scaleIdx) {
+            if (scaleIdx === 0) return "";
+            if (chunk === 1) return scales[scaleIdx];
+            if (chunk === 2) return scales[scaleIdx] + "ان";
+            if (chunk >= 3 && chunk <= 10) return scales[scaleIdx] + "ات";
+            return scales[scaleIdx];
         }
 
-        if (typeof numberToArabic === 'undefined') {
-            errorDiv.innerHTML = "مكتبة التفقيط غير موجودة.";
-            return;
+        let parts = [];
+        let i = 0;
+        let tempInt = intPart;
+        while (tempInt > 0 && i < scales.length) {
+            let chunk = tempInt % 1000;
+            if (chunk > 0) {
+                let chunkWords = chunkToWords(chunk);
+                let scaleWord = getScaleWord(chunk, i);
+                if (scaleWord) {
+                    if (chunk === 1) {
+                        chunkWords = scaleWord;
+                    } else if (chunk === 2) {
+                        chunkWords = scaleWord + "ان";
+                    } else if (chunk >= 3 && chunk <= 10) {
+                        chunkWords += " " + scaleWord + "ات";
+                    } else {
+                        chunkWords += " " + scaleWord;
+                    }
+                }
+                parts.unshift(chunkWords.trim());
+            }
+            tempInt = Math.floor(tempInt / 1000);
+            i++;
+        }
+        let rialText = parts.join(" و ");
+        // قواعد الجمع والمثنى والمفرد للريال
+        if (intPart === 1) rialText += " ريال";
+        else if (intPart === 2) rialText += " ريالان";
+        else if (intPart >= 3 && intPart <= 10) rialText += " ريالات";
+        else if (intPart > 10) rialText += " ريال";
+
+        let hellahText = "";
+        if (decPart && decPart > 0) {
+            let hellahWords = chunkToWords(decPart);
+            if (decPart === 1) hellahText = hellahWords + " هللة";
+            else if (decPart === 2) hellahText = hellahWords + " هللتان";
+            else if (decPart >= 3 && decPart <= 10) hellahText = hellahWords + " هللات";
+            else hellahText = hellahWords + " هللة";
         }
 
-        let convertedNumber = numberToArabic(numberValue);
-        document.getElementById("convertedResult").innerHTML = `<h3>نتيجة التفقيط:</h3><p>${convertedNumber}</p>`;
-        errorDiv.innerHTML = '';
+        if (rialText && hellahText) {
+            return rialText + " و " + hellahText;
+        } else if (rialText) {
+            return rialText;
+        } else if (hellahText) {
+            return hellahText;
+        } else {
+            return "صفر";
+        }
     }
 
     validateInputs();
