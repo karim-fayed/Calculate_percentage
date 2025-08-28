@@ -40,26 +40,31 @@ document.addEventListener("DOMContentLoaded", function() {
 
         errorDiv.innerHTML = ''; // إزالة الرسائل الخطأ السابقة
 
-        // العمليات الحسابية بناءً على النوع المختار
         switch (operation) {
             case "extract":
-                // استخراج النسبة فقط (المبلغ × النسبة المئوية / 100)
+                // استخراج الضريبة فقط (المبلغ × النسبة المئوية / 100)
                 result = (amount * percentage) / 100;
+                resultDiv.innerHTML = `<h3>الضريبة:</h3><p>${result.toFixed(2)}</p>`;
                 break;
+
             case "subtract":
-                // خصم النسبة من المبلغ (المبلغ × (1 - النسبة / 100))
-                result = amount - (amount * percentage) / 100;
+                // إذا كان المبلغ الإجمالي يشمل الضريبة، احسب المبلغ قبل الضريبة والضريبة
+                const amountWithoutTax = amount / (1 + percentage / 100);
+                const taxAmount = amount - amountWithoutTax;
+                resultDiv.innerHTML = `<h3>المبلغ قبل الضريبة:</h3><p>${amountWithoutTax.toFixed(2)}</p>
+                                       <h3>مقدار الضريبة:</h3><p>${taxAmount.toFixed(2)}</p>`;
                 break;
+
             case "add":
-                // إضافة النسبة إلى المبلغ (المبلغ × (1 + النسبة / 100))
+                // إضافة الضريبة إلى المبلغ الأساسي (المبلغ × (1 + النسبة / 100))
                 result = amount * (1 + percentage / 100);
+                resultDiv.innerHTML = `<h3>المبلغ الإجمالي مع الضريبة:</h3><p>${result.toFixed(2)}</p>`;
                 break;
+
             default:
                 result = 0;
                 break;
         }
-
-        resultDiv.innerHTML = `<h3>النتيجة:</h3><p>${result.toFixed(2)}</p>`;
     });
 
     // تحويل الرقم إلى اللغة العربية
@@ -78,4 +83,22 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // التحقق من أن المدخل هو رقم فقط
         if (!/^\d+(\.\d+)?$/.test(numberValue)) {
-            errorDiv.inner
+            errorDiv.innerHTML = "الرجاء إدخال رقم صالح.";
+            return;
+        }
+
+        // التحقق إذا كانت مكتبة التحويل موجودة
+        if (typeof numberToArabic === 'undefined') {
+            errorDiv.innerHTML = "مكتبة التفقيط غير موجودة.";
+            return;
+        }
+
+        // استخدام دالة التحويل إلى اللغة العربية
+        let convertedNumber = numberToArabic(numberValue);
+        document.getElementById("convertedResult").innerHTML = `<h3>نتيجة التفقيط:</h3><p>${convertedNumber}</p>`;
+        errorDiv.innerHTML = ''; // إزالة الرسائل الخطأ السابقة
+    }
+
+    // تفعيل التحقق الأولي للمدخلات عند تحميل الصفحة
+    validateInputs();
+});
