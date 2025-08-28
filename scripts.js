@@ -41,24 +41,24 @@ document.addEventListener("DOMContentLoaded", function() {
         errorDiv.innerHTML = ''; // إزالة الرسائل الخطأ السابقة
 
         switch (operation) {
-            case "extract":
-                // استخراج الضريبة فقط (المبلغ × النسبة المئوية / 100)
+            case "calculateTax":
+                // حساب الضريبة فقط (المبلغ × النسبة المئوية / 100)
                 result = (amount * percentage) / 100;
-                resultDiv.innerHTML = `<h3>الضريبة:</h3><p>${result.toFixed(2)}</p>`;
+                resultDiv.innerHTML = `<h3>مقدار الضريبة:</h3><p>${result.toFixed(2)}</p>`;
                 break;
 
-            case "subtract":
-                // إذا كان المبلغ الإجمالي يشمل الضريبة، احسب المبلغ قبل الضريبة والضريبة
-                const amountWithoutTax = amount / (1 + percentage / 100);
-                const taxAmount = amount - amountWithoutTax;
-                resultDiv.innerHTML = `<h3>المبلغ قبل الضريبة:</h3><p>${amountWithoutTax.toFixed(2)}</p>
-                                       <h3>مقدار الضريبة:</h3><p>${taxAmount.toFixed(2)}</p>`;
-                break;
-
-            case "add":
-                // إضافة الضريبة إلى المبلغ الأساسي (المبلغ × (1 + النسبة / 100))
+            case "calculateTotalIncludingTax":
+                // إذا كان المبلغ الأساسي، حساب المبلغ الإجمالي شاملاً الضريبة (المبلغ × (1 + النسبة / 100))
                 result = amount * (1 + percentage / 100);
                 resultDiv.innerHTML = `<h3>المبلغ الإجمالي مع الضريبة:</h3><p>${result.toFixed(2)}</p>`;
+                break;
+
+            case "calculateAmountBeforeTax":
+                // إذا كان المبلغ الإجمالي يشمل الضريبة، احسب المبلغ قبل الضريبة (المبلغ الإجمالي / (1 + النسبة / 100))
+                const amountBeforeTax = amount / (1 + percentage / 100);
+                const taxAmount = amount - amountBeforeTax;
+                resultDiv.innerHTML = `<h3>المبلغ قبل الضريبة:</h3><p>${amountBeforeTax.toFixed(2)}</p>
+                                       <h3>مقدار الضريبة:</h3><p>${taxAmount.toFixed(2)}</p>`;
                 break;
 
             default:
