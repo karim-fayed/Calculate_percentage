@@ -78,22 +78,4 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // التحقق من أن المدخل هو رقم فقط
         if (!/^\d+(\.\d+)?$/.test(numberValue)) {
-            errorDiv.innerHTML = "الرجاء إدخال رقم صالح.";
-            return;
-        }
-
-        // التحقق إذا كانت مكتبة التحويل موجودة
-        if (typeof numberToArabic === 'undefined') {
-            errorDiv.innerHTML = "مكتبة التفقيط غير موجودة.";
-            return;
-        }
-
-        // استخدام دالة التحويل إلى اللغة العربية
-        let convertedNumber = numberToArabic(numberValue);
-        document.getElementById("convertedResult").innerHTML = `<h3>نتيجة التفقيط:</h3><p>${convertedNumber}</p>`;
-        errorDiv.innerHTML = ''; // إزالة الرسائل الخطأ السابقة
-    }
-
-    // تفعيل التحقق الأولي للمدخلات عند تحميل الصفحة
-    validateInputs();
-});
+            errorDiv.inner
