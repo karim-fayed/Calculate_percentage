@@ -80,45 +80,95 @@ document.addEventListener("DOMContentLoaded", function() {
         return Number((a * b).toFixed(aDec + bDec));
     }
 
-    // دالة تفقيط عربية بسيطة
+    // دالة تفقيط احترافية للريال والهللة
     function tafqit(num) {
-        // يدعم الأرقام حتى المليار
-        const ones = ["", "واحد", "اثنان", "ثلاثة", "أربعة", "خمسة", "ستة", "سبعة", "ثمانية", "تسعة"];
-        const tens = ["", "عشرة", "عشرون", "ثلاثون", "أربعون", "خمسون", "ستون", "سبعون", "ثمانون", "تسعون"];
-        const teens = ["عشرة", "أحد عشر", "اثنا عشر", "ثلاثة عشر", "أربعة عشر", "خمسة عشر", "ستة عشر", "سبعة عشر", "ثمانية عشر", "تسعة عشر"];
-        const hundreds = ["", "مائة", "مائتان", "ثلاثمائة", "أربعمائة", "خمسمائة", "ستمائة", "سبعمائة", "ثمانمائة", "تسعمائة"];
-        const thousands = ["", "ألف", "مليون", "مليار"];
         if (isNaN(num)) return "";
         num = Number(num).toFixed(2);
         let [intPart, decPart] = num.split('.');
-        let intNum = parseInt(intPart);
-        if (intNum === 0) return "صفر";
+        intPart = parseInt(intPart);
+        decPart = parseInt(decPart);
+        // دوال الأرقام
+        const units = ["", "واحد", "اثنان", "ثلاثة", "أربعة", "خمسة", "ستة", "سبعة", "ثمانية", "تسعة"];
+        const teens = ["عشرة", "أحد عشر", "اثنا عشر", "ثلاثة عشر", "أربعة عشر", "خمسة عشر", "ستة عشر", "سبعة عشر", "ثمانية عشر", "تسعة عشر"];
+        const tens = ["", "عشرة", "عشرون", "ثلاثون", "أربعون", "خمسون", "ستون", "سبعون", "ثمانون", "تسعون"];
+        const hundreds = ["", "مائة", "مائتان", "ثلاثمائة", "أربعمائة", "خمسمائة", "ستمائة", "سبعمائة", "ثمانمائة", "تسعمائة"];
+        const scales = ["", "ألف", "مليون", "مليار"];
+
+        function chunkToWords(chunk) {
+            let words = [];
+            let h = Math.floor(chunk / 100);
+            let t = chunk % 100;
+            if (h > 0) words.push(hundreds[h]);
+            if (t > 0) {
+                if (t < 10) words.push(units[t]);
+                else if (t < 20) words.push(teens[t - 10]);
+                else {
+                    let u = t % 10;
+                    let d = Math.floor(t / 10);
+                    if (u > 0) words.push(units[u]);
+                    words.push(tens[d]);
+                }
+            }
+            return words.join(" و ");
+        }
+
+        function getScaleWord(chunk, scaleIdx) {
+            if (scaleIdx === 0) return "";
+            if (chunk === 1) return scales[scaleIdx];
+            if (chunk === 2) return scales[scaleIdx] + "ان";
+            if (chunk >= 3 && chunk <= 10) return scales[scaleIdx] + "ات";
+            return scales[scaleIdx];
+        }
+
         let parts = [];
         let i = 0;
-        while (intNum > 0 && i < thousands.length) {
-            let chunk = intNum % 1000;
+        let tempInt = intPart;
+        while (tempInt > 0 && i < scales.length) {
+            let chunk = tempInt % 1000;
             if (chunk > 0) {
-                let chunkText = "";
-                let h = Math.floor(chunk / 100);
-                let t = chunk % 100;
-                if (h > 0) chunkText += hundreds[h] + " ";
-                if (t > 0) {
-                    if (t < 10) chunkText += ones[t];
-                    else if (t < 20) chunkText += teens[t - 10];
-                    else chunkText += ones[t % 10] + " و" + tens[Math.floor(t / 10)];
+                let chunkWords = chunkToWords(chunk);
+                let scaleWord = getScaleWord(chunk, i);
+                if (scaleWord) {
+                    if (chunk === 1) {
+                        chunkWords = scaleWord;
+                    } else if (chunk === 2) {
+                        chunkWords = scaleWord + "ان";
+                    } else if (chunk >= 3 && chunk <= 10) {
+                        chunkWords += " " + scaleWord + "ات";
+                    } else {
+                        chunkWords += " " + scaleWord;
+                    }
                 }
-                chunkText = chunkText.trim();
-                if (chunkText) chunkText += " " + thousands[i];
-                parts.unshift(chunkText.trim());
+                parts.unshift(chunkWords.trim());
             }
-            intNum = Math.floor(intNum / 1000);
+            tempInt = Math.floor(tempInt / 1000);
             i++;
         }
-        let result = parts.join(" و ");
-        if (decPart && parseInt(decPart) > 0) {
-            result += ` و ${parseInt(decPart)} جزء من المائة`;
+        let rialText = parts.join(" و ");
+        // قواعد الجمع والمثنى والمفرد للريال
+        if (intPart === 1) rialText += " ريال";
+        else if (intPart === 2) rialText += " ريالان";
+        else if (intPart >= 3 && intPart <= 10) rialText += " ريالات";
+        else if (intPart > 10) rialText += " ريال";
+
+        let hellahText = "";
+        if (decPart && decPart > 0) {
+            let hellahWords = chunkToWords(decPart);
+            if (decPart === 1) hellahText = hellahWords + " هللة";
+            else if (decPart === 2) hellahText = hellahWords + " هللتان";
+            else if (decPart >= 3 && decPart <= 10) hellahText = hellahWords + " هللات";
+            else hellahText = hellahWords + " هللة";
         }
-        return result;
+
+        if (rialText && hellahText) {
+            return rialText + " و " + hellahText;
+        } else if (rialText) {
+            return rialText;
+        } else if (hellahText) {
+            return hellahText;
+        } else {
+            return "صفر";
+        }
     }
 
     validateInputs();
