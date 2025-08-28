@@ -1,28 +1,80 @@
+/* إخفاء شريط Vercel Toolbar */
+#__vercel, .vercel-toolbar {
+    display: none !important;
+}
 
 body {
     font-family: 'Tajawal', Arial, sans-serif;
-    background: linear-gradient(135deg, #f8fafc 0%, #e3e6f3 100%);
+    background: linear-gradient(120deg, #6c63ff 0%, #48c6ef 100%);
+    background-attachment: fixed;
     margin: 0;
     padding: 0;
     direction: rtl;
+    min-height: 100vh;
+    animation: bgMove 12s ease-in-out infinite alternate;
+}
+
+@keyframes bgMove {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
 }
 
 .container {
     max-width: 400px;
-    margin: 40px auto;
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-    padding: 32px 24px 24px 24px;
+    margin: 48px auto;
+    background: rgba(255,255,255,0.95);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(76, 99, 255, 0.12);
+    padding: 40px 28px 32px 28px;
     text-align: center;
     position: relative;
+    backdrop-filter: blur(2px);
+    animation: fadeInUp 1.2s cubic-bezier(.39,.575,.565,1) both;
 }
 
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(40px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 18px;
+    animation: logoPop 1.2s cubic-bezier(.39,.575,.565,1) both;
+}
+
+@keyframes logoPop {
+    0% { opacity: 0; transform: scale(0.7); }
+    80% { opacity: 1; transform: scale(1.1); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+
+h2, h1 {
 h2, h1 {
     color: #2d3a4a;
     margin-bottom: 24px;
     font-weight: 700;
     font-size: 2rem;
+}
+
+/* أنيميشن للنص الرئيسي */
+.animated-title {
+    animation: textGradient 2.5s ease-in-out infinite alternate;
+    background: linear-gradient(90deg, #6c63ff, #48c6ef);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+@keyframes textGradient {
+    0% { letter-spacing: 0px; }
+    100% { letter-spacing: 2px; }
+}
 }
 
 form {
@@ -54,34 +106,44 @@ input[type="number"]:focus, select:focus {
     border-color: #6c63ff;
 }
 
-.btn, button[type="submit"] {
+button {
     background: linear-gradient(90deg, #6c63ff 0%, #48c6ef 100%);
     color: #fff;
     border: none;
-    border-radius: 8px;
-    padding: 12px;
+    border-radius: 12px;
+    padding: 14px;
     font-size: 1.1rem;
     font-weight: 700;
     cursor: pointer;
-    box-shadow: 0 2px 8px rgba(76, 110, 245, 0.08);
+    box-shadow: 0 2px 12px rgba(76, 110, 245, 0.10);
     transition: background 0.3s, transform 0.2s;
     width: 100%;
-}
-.btn:hover, button[type="submit"]:hover {
-    background: linear-gradient(90deg, #48c6ef 0%, #6c63ff 100%);
-    transform: scale(1.04);
+    animation: btnPop 1.2s cubic-bezier(.39,.575,.565,1) both;
 }
 
-.result, #result, #convertedResult {
+@keyframes btnPop {
+    0% { opacity: 0; transform: scale(0.7); }
+    80% { opacity: 1; transform: scale(1.05); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+button:hover {
+    background: linear-gradient(90deg, #48c6ef 0%, #6c63ff 100%);
+    transform: scale(1.07);
+    box-shadow: 0 4px 16px rgba(76, 110, 245, 0.18);
+}
+
+#result {
     margin-top: 24px;
     font-size: 1.2rem;
     color: #2d3a4a;
     background: #f3f6fa;
-    border-radius: 8px;
-    padding: 12px;
+    border-radius: 12px;
+    padding: 14px;
     min-height: 32px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    box-shadow: 0 2px 8px rgba(76, 110, 245, 0.08);
     font-weight: 500;
+    animation: fadeInUp 1.2s cubic-bezier(.39,.575,.565,1) both;
 }
 .tafqit {
     margin-top: 12px;
