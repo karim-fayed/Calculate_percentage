@@ -1,100 +1,151 @@
-/* CSS */
+
 body {
     font-family: 'Tajawal', Arial, sans-serif;
-    background-color: #f4f4f4;
+    background: linear-gradient(135deg, #f8fafc 0%, #e3e6f3 100%);
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    direction: rtl;
 }
 
 .container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    width: 400px;
+    max-width: 400px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    padding: 32px 24px 24px 24px;
     text-align: center;
     position: relative;
 }
 
-h2 {
-    color: #333;
-    margin-bottom: 20px;
+h2, h1 {
+    color: #2d3a4a;
+    margin-bottom: 24px;
+    font-weight: 700;
+    font-size: 2rem;
 }
 
 form {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    gap: 16px;
 }
 
 label {
-    margin-bottom: 10px;
-    color: #555;
-    font-size: 18px;
-    font-weight: bold;
+    color: #3a4a5a;
+    font-size: 1rem;
+    margin-bottom: 4px;
+    text-align: right;
+    font-weight: 500;
 }
 
 input[type="number"], select {
-    width: calc(100% - 20px);
-    padding: 12px;
-    margin-bottom: 15px;
+    padding: 10px;
     border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-    transition: border-color 0.3s;
+    border: 1px solid #d1d5db;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+    margin-bottom: 10px;
 }
 
 input[type="number"]:focus, select:focus {
-    border-color: #007bff;
-    outline: none;
+    border-color: #6c63ff;
 }
 
-button {
-    width: calc(100% - 20px);
-    padding: 12px;
+.btn, button[type="submit"] {
+    background: linear-gradient(90deg, #6c63ff 0%, #48c6ef 100%);
+    color: #fff;
     border: none;
     border-radius: 8px;
-    background-color: #28a745;
-    color: white;
+    padding: 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-weight: bold;
-    text-transform: uppercase;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(76, 110, 245, 0.08);
+    transition: background 0.3s, transform 0.2s;
+    width: 100%;
+}
+.btn:hover, button[type="submit"]:hover {
+    background: linear-gradient(90deg, #48c6ef 0%, #6c63ff 100%);
+    transform: scale(1.04);
 }
 
-button:hover {
-    background-color: #20cf1a;
+.result, #result, #convertedResult {
+    margin-top: 24px;
+    font-size: 1.2rem;
+    color: #2d3a4a;
+    background: #f3f6fa;
+    border-radius: 8px;
+    padding: 12px;
+    min-height: 32px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    font-weight: 500;
 }
-
-#result {
-    margin-top: 20px;
-    color: #333;
-    font-size: 20px;
-    font-weight: bold;
+.tafqit {
+    margin-top: 12px;
+    font-size: 1.1rem;
+    color: #6c63ff;
+    font-weight: 500;
 }
 
 .moving-text {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: moveText 15s linear infinite;
-    font-size: 24px;
-    color: blue;
-    font-weight: bold;
-    text-shadow: 0 0 10px rgba(0, 0, 255, 0.5);
+    margin-top: 24px;
+    font-size: 1.1rem;
+    color: #48c6ef;
+    font-weight: 700;
+    letter-spacing: 2px;
+    animation: moveText 4s linear infinite;
+    text-shadow: 0 0 10px rgba(72, 198, 239, 0.2);
 }
 
 @keyframes moveText {
-    0% {
-        transform: translateX(100%);
+    0% { transform: translateX(0); opacity: 0.2; }
+    20% { opacity: 1; }
+    50% { transform: translateX(-40px); opacity: 1; }
+    80% { opacity: 1; }
+    100% { transform: translateX(0); opacity: 0.2; }
+}
+
+footer {
+    text-align: center;
+    margin-top: 32px;
+    color: #888;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 600px) {
+    .container {
+        max-width: 98vw;
+        padding: 16px 8px;
     }
-    100% {
-        transform: translateX(-100%);
+    h2, h1 {
+        font-size: 1.3rem;
+    }
+}
+
+@keyframes moveText {
+    0% { transform: translateX(0); opacity: 0.2; }
+    20% { opacity: 1; }
+    50% { transform: translateX(-40px); opacity: 1; }
+    80% { opacity: 1; }
+    100% { transform: translateX(0); opacity: 0.2; }
+}
+
+footer {
+    text-align: center;
+    margin-top: 32px;
+    color: #888;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 600px) {
+    .container {
+        max-width: 98vw;
+        padding: 16px 8px;
+    }
+    h2, h1 {
+        font-size: 1.3rem;
     }
 }
